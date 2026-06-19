@@ -1,0 +1,488 @@
+{
+  "meta": {
+    "title": "XplurData Docs",
+    "description": "Full documentation for XplurData \u2014 the self-hosted observability platform.",
+    "version": "1.0.0",
+    "github": "https://github.com/xplurdata/xplurdata",
+    "image_schema": {
+      "_comment": "Image section types \u2014 add to any page's sections array",
+      "single_image": {
+        "type": "image",
+        "title": "Optional heading (string)",
+        "src": "path/to/image.png (required)",
+        "alt": "Alt text for accessibility (string)",
+        "caption": "Caption shown below image (string, optional)",
+        "width": "Optional max-width e.g. 600px or 80% (string, optional)",
+        "border": "Show card border + shadow (boolean, default true)"
+      },
+      "image_grid": {
+        "type": "image-grid",
+        "title": "Optional heading (string)",
+        "cols": "Number of columns 1-4 (int, default 2)",
+        "images": [
+          {
+            "src": "path/to/image.png",
+            "alt": "Alt text",
+            "caption": "Optional caption"
+          }
+        ]
+      }
+    }
+  },
+  "nav": [
+    {
+      "id": "introduction",
+      "label": "Introduction",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "id": "quick-install",
+      "label": "Quick Install",
+      "icon": "\u26a1"
+    },
+    {
+      "id": "architecture",
+      "label": "Architecture",
+      "icon": "\ud83c\udfd7"
+    },
+    {
+      "id": "sending-logs",
+      "label": "Sending Logs",
+      "icon": "\ud83d\udce4"
+    },
+    {
+      "id": "management",
+      "label": "Management",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "id": "troubleshooting",
+      "label": "Troubleshooting",
+      "icon": "\ud83d\udd27"
+    }
+  ],
+  "pages": {
+    "introduction": {
+      "title": "Introduction",
+      "badge": "Production Ready \u00b7 OpenTelemetry Native",
+      "hero": {
+        "headline": "Full Observability.",
+        "headline2": "Zero Vendor Lock-in.",
+        "description": "XplurData is a self-hosted, Docker-based observability platform built for teams who want full control over their telemetry \u2014 no per-seat pricing, no data leaving your infrastructure.",
+        "ctas": [
+          {
+            "label": "Get Started \u2192",
+            "href": "#quick-install",
+            "primary": true
+          },
+          {
+            "label": "View Architecture",
+            "href": "#architecture",
+            "primary": false
+          }
+        ]
+      },
+      "install_preview": {
+        "lang": "bash",
+        "comment": "One command \u2014 full stack, no cloud required",
+        "code": "$ bash -c \"$(curl -fsSL \\\n    https://raw.githubusercontent.com/xd-internal/oss-stack/main/install.sh)\"",
+        "output": "\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551       XD-oss-stack Installer v1.0.0              \u2551\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u25b6  Checking system requirements\n\u2713  CPU: 8 cores       \u2713  RAM: 16 GB\n\u2713  Disk: 120 GB free  \u2713  Ports: 80, 4318 available\n\n\u25b6  Pulling Docker images\n\u2713  Doris Frontend     ready\n\u2713  Doris Backend      ready\n\u2713  OTel Collector     ready\n\u2713  Application        ready\n\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551  \u2713  Installation Complete!                       \u2551\n\u2551     Happy Xpluring your data!                    \u2551\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d"
+      },
+      "pillars": [
+        {
+          "icon": "\u26a1",
+          "title": "Ingest",
+          "desc": "Receive logs, traces and metrics from any service via OpenTelemetry OTLP/HTTP on port 4318."
+        },
+        {
+          "icon": "\ud83d\uddc4",
+          "title": "Store",
+          "desc": "Apache Doris v4.0.4 \u2014 columnar analytical database purpose-built for telemetry at scale."
+        },
+        {
+          "icon": "\ud83d\udd0d",
+          "title": "Explore",
+          "desc": "XD-API + React UI with full-text search, filtering, and real-time queries at port 80."
+        },
+        {
+          "icon": "\ud83d\udc33",
+          "title": "Deploy",
+          "desc": "4 Docker containers. One install command. Runs on Linux, macOS or Windows in under 5 minutes."
+        }
+      ],
+      "explore_cards": [
+        {
+          "num": "01",
+          "title": "Quick Install",
+          "desc": "Install the full stack with one command on Linux, macOS, or Windows.",
+          "href": "#quick-install"
+        },
+        {
+          "num": "02",
+          "title": "Architecture",
+          "desc": "How the four containers work together. Includes the full system diagram.",
+          "href": "#architecture"
+        },
+        {
+          "num": "03",
+          "title": "Sending Logs",
+          "desc": "Use telemetrygen, Python SDK or any OTel-compatible SDK to ship data.",
+          "href": "#sending-logs"
+        },
+        {
+          "num": "04",
+          "title": "Management",
+          "desc": "Check status, stream logs, update, restart or fully uninstall the stack.",
+          "href": "#management"
+        },
+        {
+          "num": "05",
+          "title": "Troubleshooting",
+          "desc": "Common issues and how to fix them \u2014 startup failures, missing data and more.",
+          "href": "#troubleshooting"
+        }
+      ],
+      "access_table": {
+        "title": "Access After Install",
+        "subtitle": "After the ~3\u20135 minute first boot, your stack is live:",
+        "rows": [
+          {
+            "service": "Web UI",
+            "url": "http://<your-ip>",
+            "credentials": "admin / admin"
+          },
+          {
+            "service": "OTLP HTTP",
+            "url": "http://<your-ip>:4318",
+            "credentials": "\u2014"
+          }
+        ]
+      }
+    },
+    "quick-install": {
+      "title": "Quick Install",
+      "subtitle": "Get the full XplurData stack running with a single command.",
+      "sections": [
+        {
+          "type": "requirements",
+          "title": "System Requirements",
+          "items": [
+            {
+              "label": "CPU",
+              "value": "4+ cores (8 recommended)"
+            },
+            {
+              "label": "RAM",
+              "value": "8 GB minimum (16 GB recommended)"
+            },
+            {
+              "label": "Disk",
+              "value": "40 GB free (120 GB recommended)"
+            },
+            {
+              "label": "OS",
+              "value": "Linux, macOS, or Windows (WSL2)"
+            },
+            {
+              "label": "Ports",
+              "value": "80 (Web UI), 4318 (OTLP HTTP)"
+            }
+          ]
+        },
+        {
+          "type": "code",
+          "title": "One-Line Install",
+          "lang": "bash",
+          "code": "bash -c \"$(curl -fsSL https://raw.githubusercontent.com/xd-internal/oss-stack/main/install.sh)\""
+        },
+        {
+          "type": "code",
+          "title": "Docker Compose (Manual)",
+          "lang": "bash",
+          "code": "git clone https://github.com/xplurdata/xplurdata.git\ncd xplurdata\ndocker compose up -d"
+        },
+        {
+          "type": "note",
+          "style": "info",
+          "text": "First boot takes 3\u20135 minutes while Apache Doris initialises. The Web UI will show a loading screen until the backend is ready."
+        },
+        {
+          "type": "table",
+          "title": "What Gets Installed",
+          "headers": [
+            "Container",
+            "Image",
+            "Port",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "doris-fe",
+              "apache/doris:fe-2.1",
+              "9030",
+              "Doris Frontend \u2014 SQL router"
+            ],
+            [
+              "doris-be",
+              "apache/doris:be-2.1",
+              "\u2014",
+              "Doris Backend \u2014 data storage"
+            ],
+            [
+              "otel-collector",
+              "otel/opentelemetry-collector",
+              "4318",
+              "OTLP receiver"
+            ],
+            [
+              "xplurdata-app",
+              "xplurdata/app:latest",
+              "80",
+              "Web UI + REST API"
+            ]
+          ]
+        }
+      ]
+    },
+    "architecture": {
+      "title": "Architecture",
+      "subtitle": "Four containers, one cohesive stack.",
+      "sections": [
+        {
+          "type": "prose",
+          "text": "XplurData is intentionally simple. Every component runs as a Docker container and communicates over an internal bridge network. There are no external dependencies \u2014 no managed databases, no cloud services, no API keys."
+        },
+        {
+          "type": "note",
+          "style": "info",
+          "text": "Images are loaded from the src path relative to docs.html. To add images to any page, add an \"image\" or \"image-grid\" section to docs.json \u2014 no code changes needed."
+        },
+        {
+          "type": "image",
+          "title": "Architecture Overview",
+          "src": "img/architecture.png",
+          "alt": "XplurData architecture diagram showing the four Docker containers",
+          "caption": "XplurData four-container architecture \u2014 OTel Collector \u2192 Doris \u2192 FastAPI \u2192 React UI",
+          "border": true
+        },
+        {
+          "type": "diagram",
+          "title": "System Diagram",
+          "nodes": [
+            {
+              "layer": "Sources",
+              "items": [
+                "Your App (OTLP SDK)",
+                "telemetrygen",
+                "Any OTel Agent"
+              ]
+            },
+            {
+              "layer": "Ingest",
+              "items": [
+                "OTel Collector :4318"
+              ]
+            },
+            {
+              "layer": "Storage",
+              "items": [
+                "Doris FE (SQL router)",
+                "Doris BE (column store)"
+              ]
+            },
+            {
+              "layer": "Frontend",
+              "items": [
+                "FastAPI REST :8000",
+                "React UI :80"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "title": "Network Ports",
+          "headers": [
+            "Port",
+            "Protocol",
+            "Used By",
+            "Description"
+          ],
+          "rows": [
+            [
+              "80",
+              "HTTP",
+              "Browser",
+              "Web UI"
+            ],
+            [
+              "4318",
+              "HTTP",
+              "Your applications",
+              "OTLP HTTP endpoint"
+            ],
+            [
+              "4317",
+              "gRPC",
+              "Your applications",
+              "OTLP gRPC endpoint"
+            ],
+            [
+              "9030",
+              "TCP",
+              "Internal",
+              "Doris FE SQL port"
+            ],
+            [
+              "8000",
+              "HTTP",
+              "Internal",
+              "FastAPI backend"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "style": "success",
+          "text": "Only ports 80 and 4318 need to be exposed externally. All other inter-service communication happens on the internal Docker network."
+        },
+        {
+          "type": "image-grid",
+          "title": "UI Screenshots",
+          "cols": 2,
+          "images": [
+            {
+              "src": "img-logs.png",
+              "alt": "Log Explorer",
+              "caption": "Log Explorer \u2014 filter, search and query logs"
+            },
+            {
+              "src": "img-users.png",
+              "alt": "User Management",
+              "caption": "User Management \u2014 add and manage users"
+            }
+          ]
+        }
+      ]
+    },
+    "sending-logs": {
+      "title": "Sending Logs",
+      "subtitle": "Ship telemetry from any language or tool to XplurData.",
+      "sections": [
+        {
+          "type": "tabs",
+          "title": "SDK Examples",
+          "tabs": [
+            {
+              "label": "Python",
+              "lang": "python",
+              "code": "pip install opentelemetry-sdk opentelemetry-exporter-otlp\n\n# instrument.py\nfrom opentelemetry import trace\nfrom opentelemetry.sdk.trace import TracerProvider\nfrom opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter\nfrom opentelemetry.sdk.trace.export import BatchSpanProcessor\n\nprovider = TracerProvider()\nexporter = OTLPSpanExporter(\n    endpoint=\"http://<YOUR_HOST>:4318/v1/traces\"\n)\nprovider.add_span_processor(BatchSpanProcessor(exporter))\ntrace.set_tracer_provider(provider)\n\ntracer = trace.get_tracer(\"my-service\")\nwith tracer.start_as_current_span(\"my-operation\"):\n    print(\"Hello, XplurData!\")"
+            },
+            {
+              "label": "Node.js",
+              "lang": "javascript",
+              "code": "npm install @opentelemetry/sdk-node @opentelemetry/exporter-trace-otlp-http\n\n// tracing.js\nconst { NodeSDK } = require('@opentelemetry/sdk-node')\nconst { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http')\n\nconst sdk = new NodeSDK({\n  serviceName: 'my-service',\n  traceExporter: new OTLPTraceExporter({\n    url: 'http://<YOUR_HOST>:4318/v1/traces',\n  }),\n})\nsdk.start()"
+            },
+            {
+              "label": "Java",
+              "lang": "bash",
+              "code": "# Download the Java agent (zero-code instrumentation)\nwget https://github.com/open-telemetry/opentelemetry-java-instrumentation\\\n  /releases/latest/download/opentelemetry-javaagent.jar\n\n# Run your app with the agent\njava -javaagent:opentelemetry-javaagent.jar \\\n  -Dotel.service.name=my-service \\\n  -Dotel.exporter.otlp.endpoint=http://<YOUR_HOST>:4318 \\\n  -jar app.jar"
+            },
+            {
+              "label": "Go",
+              "lang": "go",
+              "code": "go get go.opentelemetry.io/otel \\\n       go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp\n\n// main.go\nexp, _ := otlptracehttp.New(ctx,\n    otlptracehttp.WithEndpoint(\"<YOUR_HOST>:4318\"),\n    otlptracehttp.WithInsecure(),\n)\ntp := trace.NewTracerProvider(\n    trace.WithBatcher(exp),\n    trace.WithResource(resource.NewWithAttributes(\n        semconv.SchemaURL,\n        semconv.ServiceNameKey.String(\"my-service\"),\n    )),\n)\notel.SetTracerProvider(tp)"
+            },
+            {
+              "label": "telemetrygen",
+              "lang": "bash",
+              "code": "# Install telemetrygen\ngo install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/telemetrygen@latest\n\n# Send 1000 log records\ntelemetrygen logs \\\n  --otlp-endpoint <YOUR_HOST>:4318 \\\n  --otlp-insecure \\\n  --duration 10s \\\n  --rate 100\n\n# Send traces\ntelemetrygen traces \\\n  --otlp-endpoint <YOUR_HOST>:4318 \\\n  --otlp-insecure \\\n  --duration 10s"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "style": "info",
+          "text": "Replace <YOUR_HOST> with your server's IP address or hostname. Use port 4318 for HTTP and 4317 for gRPC."
+        }
+      ]
+    },
+    "management": {
+      "title": "Management",
+      "subtitle": "Day-to-day operations for your XplurData stack.",
+      "sections": [
+        {
+          "type": "code",
+          "title": "Check Stack Status",
+          "lang": "bash",
+          "code": "docker compose ps\n\n# Expected output:\n# NAME              STATUS         PORTS\n# doris-fe          Up 2 hours     0.0.0.0:9030->9030/tcp\n# doris-be          Up 2 hours\n# otel-collector    Up 2 hours     0.0.0.0:4318->4318/tcp\n# xplurdata-app     Up 2 hours     0.0.0.0:80->80/tcp"
+        },
+        {
+          "type": "code",
+          "title": "Stream Live Logs",
+          "lang": "bash",
+          "code": "# All containers\ndocker compose logs -f\n\n# Specific container\ndocker compose logs -f xplurdata-app\ndocker compose logs -f otel-collector"
+        },
+        {
+          "type": "code",
+          "title": "Restart Services",
+          "lang": "bash",
+          "code": "# Restart all\ndocker compose restart\n\n# Restart specific service\ndocker compose restart xplurdata-app"
+        },
+        {
+          "type": "code",
+          "title": "Update to Latest Version",
+          "lang": "bash",
+          "code": "docker compose pull\ndocker compose up -d"
+        },
+        {
+          "type": "code",
+          "title": "Full Uninstall",
+          "lang": "bash",
+          "code": "# Stop and remove containers + volumes (WARNING: deletes all data)\ndocker compose down -v\n\n# Also remove images\ndocker compose down -v --rmi all"
+        },
+        {
+          "type": "note",
+          "style": "warn",
+          "text": "Running docker compose down -v will permanently delete all telemetry data stored in Doris. Back up your data first if needed."
+        }
+      ]
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "subtitle": "Common issues and how to resolve them.",
+      "sections": [
+        {
+          "type": "faq",
+          "items": [
+            {
+              "q": "Web UI shows a blank page or loading spinner indefinitely",
+              "a": "Doris takes 3\u20135 minutes to fully initialise on first boot. Wait and refresh. If it persists beyond 10 minutes, check Doris FE logs: docker compose logs doris-fe"
+            },
+            {
+              "q": "OTLP data not appearing in the UI",
+              "a": "Verify the collector is receiving data: docker compose logs otel-collector. Check that your SDK endpoint is http://<host>:4318/v1/logs (not 4317 unless using gRPC). Ensure no firewall is blocking port 4318."
+            },
+            {
+              "q": "Port 80 or 4318 already in use",
+              "a": "Edit docker-compose.yml and change the host port mapping. For example, change \"80:80\" to \"8080:80\" and access the UI at port 8080."
+            },
+            {
+              "q": "Doris backend fails to start",
+              "a": "Doris BE requires at least 4 GB RAM and vm.max_map_count >= 2000000. Run: sudo sysctl -w vm.max_map_count=2000000"
+            },
+            {
+              "q": "docker compose command not found",
+              "a": "You may have Docker Compose v1 installed. Try docker-compose (with hyphen) instead, or upgrade to Docker Desktop which includes Compose v2."
+            },
+            {
+              "q": "Cannot connect to the database",
+              "a": "Doris FE exposes a MySQL-compatible interface on port 9030. Connect with: mysql -h 127.0.0.1 -P 9030 -u root"
+            }
+          ]
+        }
+      ]
+    }
+   
+  }
+}

@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XplurData — Unified Observability & Analytics Platform</title>
+  <link rel="icon" type="image/svg+xml" href="XplurData.svg">
+  <meta name="description"
+    content="XplurData is a powerful observability and analytics platform built on OpenTelemetry and Apache Doris. Collect, query, and visualize telemetry data at scale." />
+  <meta property="og:title" content="XplurData — Unified Observability & Analytics Platform" />
+  <meta property="og:description"
+    content="Collect, process, and visualize telemetry data with XplurData — powered by OpenTelemetry and Apache Doris." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- TOP ANNOUNCEMENT BANNER -->
+  <div class="top-banner" id="top-banner">
+    <div class="banner-inner">
+      <span class="banner-badge">Open Source</span>
+      <span class="banner-text">XplurData is 100% Free &amp; Open Source under the <strong>AGPLv3</strong>
+        License</span>
+    </div>
+    <button class="banner-close" id="banner-close" aria-label="Dismiss banner">×</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" id="nav-logo-link">
+        <span class="logo-icon">
+          <img src="XplurData.svg" alt="XplurData Logo" width="28" height="28">
+        </span>
+        <span class="logo-text">XplurData</span>
+        <span class="nav-oss-badge">AGPLv3 License</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#screenshots" class="nav-link">Product</a></li>
+        <li><a href="#architecture" class="nav-link">Architecture</a></li>
+        <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+        <li><a href="docs.html" class="nav-link">Docs</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://github.com/xplurdata/oss-stack" target="_blank" rel="noopener" class="btn-github-nav"
+          id="nav-github-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+          GitHub
+          <span class="github-stars-count" id="github-stars">★ Star</span>
+        </a>
+        <button class="btn-ghost" id="theme-toggle" aria-label="Toggle theme">
+          <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" style="display:none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <a href="#deploy" class="btn-primary" id="nav-cta">Get Started</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" style="overflow:hidden;width:100%;max-width:100vw;">
+    <canvas id="hero-particles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-inner">
+      <div class="hero-badge" id="hero-badge">
+        <span class="badge-dot"></span>
+        🔓 100% Open Source &amp; Self-Hosted — AGPLv3 License
+      </div>
+      <h1 class="hero-title">
+        Unified Observability<br />
+        <span class="gradient-text">at Scale</span>
+
+      </h1>
+      <div class="hero-badge-yellow" id="hero-badge-yellow">Explore Your Data With Freedom </div>
+      <p class="hero-subtitle">
+        XplurData is a <strong>free, open-source</strong> observability platform — centralizing logs, traces, and
+        metrics
+        into one powerful analytics stack. Deploy on your own infrastructure, no lock-in, no license fees.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://github.com/xplurdata/oss-stack" target="_blank" rel="noopener" class="btn-primary btn-lg"
+          id="hero-cta-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+          ⭐ Star on GitHub
+          <span class="hero-star-count" id="hero-star-count"></span>
+        </a>
+        <a href="#deploy" class="btn-outline btn-lg" id="hero-cta-deploy">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+          </svg>
+          Launch Now
+        </a>
+        <a href="#screenshots" class="btn-outline btn-lg" id="hero-cta-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          At a Glance
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value">AGPLv3 License</span>
+          <span class="stat-label">Open Source License</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">OpenTelemetry</span>
+          <span class="stat-label">Native Collection</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">Apache Doris</span>
+          <span class="stat-label">Analytics Backend</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">Docker Ready</span>
+          <span class="stat-label">One-Command Deploy</span>
+        </div>
+      </div>
+
+      <!-- HERO LIVE OBSERVABILITY SANDBOX -->
+      <!-- HERO LIVE PREVIEW — matches actual product UI -->
+      <div class="hero-live-preview" id="hero-live-preview">
+
+        <!-- ── Green App Sidebar (matches product exactly) ── -->
+        <div class="hlp-sidebar">
+          <div class="hlp-logo">
+            <a href="#" class="nav-logo">
+              <span class="logo-icon">
+                <img src="XplurData.svg" alt="XplurData Logo" width="20" height="20">
+              </span>
+            </a>
+            <span>XplurData</span>
+          </div>
+          <nav class="hlp-nav">
+            <button class="hlp-nav-item active" data-panel="logs" id="smb-logs">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              Logs
+            </button>
+            <button class="hlp-nav-item" data-panel="traces" id="smb-traces">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+              Traces
+            </button>
+            <button class="hlp-nav-item" data-panel="metrics" id="smb-metrics">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+              Metrics
+            </button>
+        <button class="tab-btn" data-tab="stats" id="tab-stats">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+          </svg>
+          Stats
+        </button>
+            <button class="hlp-nav-item" data-panel="users" id="smb-users">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+              </svg>
+              User Management
+            </button>
+          </nav>
+          <div class="hlp-sidebar-footer">
+            <div class="hlp-avatar">A</div>
+            <span>Admin</span>
+          </div>
+        </div>
+
+        <!-- ── Main App Area ── -->
+        <div class="hlp-main">
+
+          <!-- Dark topbar matching product -->
+          <div class="hlp-topbar">
+            <span class="hlp-breadcrumb">
+              Observability
+              <span class="hlp-bc-arrow">›</span>
+              <strong id="hlp-page-name">Logs</strong>
+            </span>
+            <div class="hlp-topbar-right">
+              <span class="hlp-demo-pill">Demo <span class="hlp-demo-toggle"></span></span>
+              <span class="hlp-timerange">⏱ May 26 14:20 → May 29 16:16 &nbsp; Kolkata ▾</span>
+              <span class="hlp-refresh">↻ Refresh ▾</span>
+            </div>
+          </div>
+
+          <!-- ── PANEL: Logs (active) ── -->
+          <div class="hlp-panel active" id="panel-logs">
+            <!-- Filter + query bar row -->
+            <div class="hlp-filter-row">
+              <div class="hlp-filter-pill">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+                Filters <span class="hlp-filter-plus">+</span>
+              </div>
+              <div class="hlp-querybar">
+                <span class="hlp-query-eq">≡</span>
+                <span class="hlp-query-text">Smart Query &nbsp;<span style="color:var(--fg-subtle)">e.g.
+                    service_name="kafka"</span></span>
+              </div>
+              <div class="hlp-query-actions">
+                <span class="hlp-match-btn">Match / Match Any ▾</span>
+                <span class="hlp-hide-chart">⊘ Hide chart</span>
+              </div>
+            </div>
+
+            <!-- Filter chips row -->
+            <div class="hlp-chips-row">
+              <div class="hlp-chip-group">
+                <span class="hlp-chip-label">Service</span>
+                <span class="hlp-chip hlp-chip-green">Inventory-Service <em>2.2K</em></span>
+                <span class="hlp-chip hlp-chip-blue">Api-Gateway <em>2.1K</em></span>
+                <span class="hlp-chip hlp-chip-green">Auth-Service <em>2.1K</em></span>
+                <span class="hlp-chip hlp-chip-green">Notification-Service <em>2.1K</em></span>
+                <span class="hlp-chip hlp-chip-yellow">Payment-Service <em>2.1K</em></span>
+              </div>
+              <div class="hlp-chip-group">
+                <span class="hlp-chip-label">Severity</span>
+                <span class="hlp-chip hlp-chip-info">Info <em>7.4K</em></span>
+                <span class="hlp-chip hlp-chip-warn">Warning <em>1.6K</em></span>
+                <span class="hlp-chip hlp-chip-error">Error <em>1K</em></span>
+                <span class="hlp-chip hlp-chip-debug">Debug <em>522</em></span>
+              </div>
+            </div>
+
+            <!-- Live bar chart -->
+            <div class="hlp-chart-wrap">
+              <span class="hlp-chart-total">• Total</span>
+              <div class="hlp-chart-y-labels">
+                <span>6.0k</span><span>4.5k</span><span>3.0k</span><span>1.5k</span><span>0</span>
+              </div>
+              <svg class="hlp-chart-svg" id="logs-chart-svg" viewBox="0 0 600 70" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="logs-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1B8AB5" stop-opacity="0.7" />
+                    <stop offset="100%" stop-color="#1B8AB5" stop-opacity="0.2" />
+                  </linearGradient>
+                </defs>
+                <path class="logs-chart-gradient" id="logs-area-path" d="" />
+                <path class="logs-chart-path" id="logs-line-path" d="" />
+              </svg>
+            </div>
+
+            <!-- Table toolbar -->
+            <div class="hlp-table-bar">
+              <span class="hlp-table-filter-input">🔍 Filter table data...</span>
+              <span class="hlp-export-btn">⬇ Export</span>
+            </div>
+
+            <!-- Log table -->
+            <div class="hlp-table">
+              <div class="hlp-thead">
+                <span>TIMESTAMP ↓</span><span>BODY</span><span>SERVICE NAME</span><span>INSTANCE ID</span><span>TRACE
+                  ID</span>
+              </div>
+              <div class="hlp-tbody" id="logs-stream">
+                <!-- rows injected by JS -->
+              </div>
+            </div>
+            <div class="hlp-table-foot">
+              <span>1 – 500 of 10,499 logs</span>
+              <span style="margin-left:auto">Rows <b>500 ▾</b> &nbsp; ‹‹ ‹ <span class="hlp-page-num">1</span> 2 3 4 5 ›
+                ››</span>
+            </div>
+          </div>
+
+          <!-- ── PANEL: Traces ── -->
+          <div class="hlp-panel" id="panel-traces">
+            <div class="hlp-coming-card">
+              <div class="hlp-coming-badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                New module
+              </div>
+              <div class="hlp-coming-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#06805f" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+                <strong>Traces</strong>
+              </div>
+              <p class="hlp-coming-desc">Track request lifecycles and latency across distributed services.</p>
+              <hr class="hlp-coming-hr" />
+              <p class="hlp-coming-soon">This section is coming soon. We are building a focused experience for this
+                signal.</p>
+            </div>
+          </div>
+
+          <!-- ── PANEL: Metrics ── -->
+          <div class="hlp-panel" id="panel-metrics">
+            <div class="hlp-coming-card">
+              <div class="hlp-coming-badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                New module
+              </div>
+              <div class="hlp-coming-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#06805f" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+                <strong>Metrics</strong>
+              </div>
+              <p class="hlp-coming-desc">Monitor time-series KPIs, saturation, and performance trends.</p>
+              <hr class="hlp-coming-hr" />
+              <p class="hlp-coming-soon">This section is coming soon. We are building a focused experience for this
+                signal.</p>
+            </div>
+          </div>
+
+          <!-- ── PANEL: Users ── -->
+          <div class="hlp-panel" id="panel-users">
+            <div class="hlp-users-header">
+              <div>
+                <div class="hlp-users-title">User Management</div>
+                <div class="hlp-users-sub">Manage system users</div>
+              </div>
+              <button class="hlp-add-user">+ Add User</button>
+            </div>
+            <div class="hlp-user-table">
+              <div class="hlp-user-head">
+                <span>USERNAME</span><span>EMAIL</span><span>CREATED</span><span>UPDATED</span><span>ACTIONS</span>
+              </div>
+              <div class="hlp-user-row"><span>Admin</span><span>Admin@Otelstack.Local</span><span>5/26/2026, 2:48:35
+                  PM</span><span>5/26/2026, 2:48:35 PM</span><span><button class="hlp-act-edit">✏</button></span></div>
+              <div class="hlp-user-row"><span>Obs</span><span>Obs@Obs.Live</span><span>5/29/2026, 10:55:05
+                  AM</span><span>5/29/2026, 10:55:05 AM</span><span><button class="hlp-act-edit">✏</button><button
+                    class="hlp-act-del">🗑</button></span></div>
+            </div>
+          </div>
+
+        </div><!-- /hlp-main -->
+      </div>
+      <!-- END SANDBOX -->
+
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Core Features</span>
+        <h2 class="section-title">Everything you need for<br /> <span class="gradient-text">modern observability</span>
+        </h2>
+        <p class="section-sub">A complete platform built for engineering and operations teams who need clarity, speed,
+          and control over
+          their systems.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card spotlight-card" id="feat-realtime">
+          <div class="feature-icon-wrap" style="--icon-color: #06805f; --icon-bg: rgba(6,128,95,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h3>Log Observability</h3>
+          <p>Log Observability enables teams to gain deep visibility into system behavior by collecting, analyzing,
+            correlating, and searching logs in real time to detect issues, investigate incidents, and optimize
+            performance.</p>
+          <ul class="feature-list">
+            <li>Granular Detail of logs</li>
+            <li>Event Driven Data</li>
+            <li>Structured Logging</li>
+            <li>One DataStore</li>
+          </ul>
+        </div>
+        <div class="feature-card feature-card spotlight-card" id="feat-explorer">
+          <div class="feature-icon-wrap" style="--icon-color: #06805f; --icon-bg: rgba(6,128,95,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <h3>Smart Log Explorer </h3>
+          <p>Write Smart queries, apply multi-dimensional filters (service, severity, host, time, etc.), and see results
+            in
+            a compact, sortable table — all in real time.</p>
+          <ul class="feature-list">
+            <li>Smart query editor with syntax highlighting</li>
+            <li>Severity badges: INFO, WARN, ERROR, DEBUG</li>
+            <li>Time range picker &amp; live refresh</li>
+            <li>Charts for log volume over time</li>
+          </ul>
+        </div>
+
+        <div class="feature-card spotlight-card" id="feat-auth">
+          <div class="feature-icon-wrap" style="--icon-color: #1B8AB5; --icon-bg: rgba(27,138,181,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <h3>Free Text Search</h3>
+          <p>Search logs using Apache Doris <span class="hero-badge-yellow hero-badge-freetext">Free Text Search</span>
+            capabilities and <span class="hero-badge-yellow hero-badge-freetext">BM25 filter</span></p>
+          <ul class="feature-list">
+            <li>Match, Match ALL</li>
+            <li>Match Any</li>
+            <li>Match Phrase</li>
+            <li>Match Phrase Prefix</li>
+            <li>Match Phrase Edge</li>
+            <li>Match Regexp</li>
+          </ul>
+        </div>
+
+        <!-- <div class="feature-card spotlight-card" id="feat-auth">
+          <div class="feature-icon-wrap" style="--icon-color: #1B8AB5; --icon-bg: rgba(27,138,181,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <h3>Secure Authentication</h3>
+          <p>JWT-based login with HTTP-only cookies, access control, and session restore on page refresh.</p>
+        </div> -->
+
+        <div class="feature-card spotlight-card" id="feat-users">
+          <div class="feature-icon-wrap" style="--icon-color: #5DC497; --icon-bg: rgba(93,196,151,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3>User Management</h3>
+          <p>Panel for creating, editing, and removing users with standard Admin access.</p>
+        </div>
+
+        <!--<div class="feature-card spotlight-card" id="feat-themes">
+          <div class="feature-icon-wrap" style="--icon-color: #ffd23f; --icon-bg: rgba(255,210,63,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+            </svg>
+          </div>
+          <h3>Multi-Theme Support</h3>
+          <p>Light, Dark, Midnight, and Slate themes — user-selectable and persisted. Full design-token system for
+            consistent, branded UI.</p>
+        </div>-->
+
+        <div class="feature-card spotlight-card" id="feat-export">
+          <div class="feature-icon-wrap" style="--icon-color: #E24B4A; --icon-bg: rgba(226,75,74,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </div>
+          <h3>Data Export</h3>
+          <p>Export query results as CSV, TSV, XLS directly from the Explorer. Column visibility and ordering controls
+            let you
+            shape your exports precisely.</p>
+        </div>
+
+
+
+        <!-- <div class="feature-card spotlight-card" id="feat-prefs">
+          <div class="feature-icon-wrap" style="--icon-color: #9A9080; --icon-bg: rgba(154,144,128,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.07 4.93a10 10 0 0 0-14.14 0M4.93 19.07a10 10 0 0 0 14.14 0M1 12h2m18 0h2M12 1v2m0 18v2" />
+            </svg>
+          </div>
+          <h3>Saved Preferences</h3>
+          <p>Persist column configs, saved views, default filters, and theme choices. Settings sync to the backend and
+            restore on next login.</p>
+        </div>-->
+        <div class="feature-card spotlight-card" id="feat-prefs">
+          <div class="feature-icon-wrap" style="--icon-color: #9A9080; --icon-bg: rgba(154,144,128,0.12);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+              <line x1="8" y1="20" x2="16" y2="20"></line>
+              <line x1="12" y1="16" x2="12" y2="20"></line>
+            </svg>
+          </div>
+          <h3>Demo</h3>
+          <p>Interact with the live demo to explore features and functionality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="section arch-section" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Architecture</span>
+        <h2 class="section-title">How it all <span class="gradient-text">fits together</span></h2>
+        <p class="section-sub">A modular, containerized architecture — every component is independent and scalable.</p>
+      </div>
+      <div class="arch-diagram">
+        <div class="arch-layer arch-layer--sources">
+          <div class="arch-layer-label">Data Sources</div>
+          <div class="arch-nodes">
+            <div class="arch-node" id="arch-apps">
+              <div class="arch-node-icon">📱</div><span>Applications</span>
+            </div>
+            <div class="arch-node" id="arch-services">
+              <div class="arch-node-icon">⚙️</div><span>Microservices</span>
+            </div>
+            <div class="arch-node" id="arch-infra">
+              <div class="arch-node-icon">🖥️</div><span>Infrastructure</span>
+            </div>
+          </div>
+        </div>
+        <div class="arch-arrow">
+          <svg width="24" height="48" viewBox="0 0 24 48" fill="none">
+            <path d="M12 0 L12 36" stroke="#06805f" stroke-width="2" stroke-dasharray="4 4" />
+            <polyline points="6,36 12,44 18,36" fill="none" stroke="#06805f" stroke-width="2" />
+          </svg>
+          <span class="arch-arrow-label">OTLP / gRPC / HTTP</span>
+        </div>
+        <div class="arch-layer arch-layer--collector">
+          <div class="arch-layer-label">Collection</div>
+          <div class="arch-nodes">
+            <div class="arch-node arch-node--primary" id="arch-otel">
+              <div class="arch-node-icon">🔭</div><span>OTEL Collector</span><small>otel-config.yaml</small>
+            </div>
+          </div>
+        </div>
+        <div class="arch-arrow">
+          <svg width="24" height="48" viewBox="0 0 24 48" fill="none">
+            <path d="M12 0 L12 36" stroke="#06805f" stroke-width="2" stroke-dasharray="4 4" />
+            <polyline points="6,36 12,44 18,36" fill="none" stroke="#06805f" stroke-width="2" />
+          </svg>
+          <span class="arch-arrow-label">SQL Ingestion</span>
+        </div>
+        <div class="arch-layer arch-layer--storage">
+          <div class="arch-layer-label">Storage &amp; API</div>
+          <div class="arch-nodes">
+            <div class="arch-node" id="arch-doris-fe">
+              <div class="arch-node-icon">🗄️</div><span>Doris FE</span><small>Query Router</small>
+            </div>
+            <div class="arch-node arch-node--primary" id="arch-api">
+              <div class="arch-node-icon"><img src="./XplurData.svg" alt="XD API" width="20" height="20"></div><span>XD Api</span><small>XD Core</small>
+            </div>
+            <div class="arch-node" id="arch-doris-be">
+              <div class="arch-node-icon">💾</div><span>Doris BE</span><small>Analytics Store</small>
+            </div>
+          </div>
+        </div>
+        <div class="arch-arrow">
+          <svg width="24" height="48" viewBox="0 0 24 48" fill="none">
+            <path d="M12 0 L12 36" stroke="#06805f" stroke-width="2" stroke-dasharray="4 4" />
+            <polyline points="6,36 12,44 18,36" fill="none" stroke="#06805f" stroke-width="2" />
+          </svg>
+          <span class="arch-arrow-label">REST / WebSocket</span>
+        </div>
+        <div class="arch-layer arch-layer--frontend">
+          <div class="arch-layer-label">Frontend</div>
+          <div class="arch-nodes">
+            <div class="arch-node arch-node--primary" id="arch-react">
+              <div class="arch-node-icon"><img src="./XplurData.svg" alt="XD API" width="20" height="20"></div><span>XD Frontend</span><small>XD App</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SCREENSHOTS -->
+  <section class="section screenshots-section" id="screenshots">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Product Screenshots</span>
+        <h2 class="section-title">Built for <span class="gradient-text">power users</span></h2>
+        <p class="section-sub">A clean, modern interface designed to surface insight fast — with the depth engineers
+          demand.</p>
+      </div>
+
+      <div class="screenshots-tabs" id="screenshots-tabs">
+        <button class="tab-btn active" data-tab="dashboard" id="tab-dashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          Log Explorer
+        </button>
+        <button class="tab-btn" data-tab="traces" id="tab-traces">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 3H5a2 2 0 0 0-2 2v4" />
+            <path d="M9 21H5a2 2 0 0 1-2-2v-4" />
+            <path d="M15 3h4a2 2 0 0 1 2 2v4" />
+            <path d="M15 21h4a2 2 0 0 0 2-2v-4" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+          </svg>
+          Traces
+        </button>
+        <button class="tab-btn" data-tab="metrics" id="tab-metrics">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+          </svg>
+          Metrics
+        </button>
+        <button class="tab-btn" data-tab="stats" id="tab-stats">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+          </svg>
+          Stats
+        </button>
+        <button class="tab-btn" data-tab="users" id="tab-users">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+          </svg>
+          User Management
+        </button>
+      </div>
+
+      <div class="screenshot-panel active" id="sc-panels-dashboard">
+        <div class="screenshot-wrap">
+          <div class="browser-chrome">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">http://localhost/xplur/logs</div>
+          </div>
+          <img src="img-logs.png" alt="XplurData Log Explorer" class="screenshot-img" loading="lazy" />
+        </div>
+        <div class="screenshot-caption">
+          <h3>Smart Log Explorer</h3>
+          <p>Write Smart queries, apply multi-dimensional filters (service, severity, host, time, etc.), and see results
+            in a compact, sortable table — all in real time.</p>
+          <div class="caption-badges">
+            <span class="badge badge-info">Live Logs</span>
+            <span class="badge badge-success">Granular Detail of logs</span>
+            <span class="badge badge-warn">Event Driven Data</span>
+            <span class="badge badge-warn">Free Text Search</span>
+            <span class="badge badge-warn">BM25 Filter</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-panel" id="sc-panels-traces">
+        <div class="screenshot-wrap">
+          <div class="browser-chrome">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">http://localhost/xplur/traces</div>
+          </div>
+          <img src="img-traces.png" alt="XplurData Traces" class="screenshot-img" loading="lazy" />
+        </div>
+        <div class="screenshot-caption">
+          <h3>Distributed Traces<span class="badge badge-warn">Coming soon</span></h3>
+          <p> A dedicated Traces view for tracking full request lifecycles and latency across all your
+            distributed services. Built on top of OTEL span data already flowing in.</p>
+          <div class="caption-badges">
+            <span class="badge badge-info">In Development</span>
+            <span class="badge badge-success">OTEL Native</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-panel" id="sc-panels-metrics">
+        <div class="screenshot-wrap">
+          <div class="browser-chrome">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">http://localhost/xplur/metrics</div>
+          </div>
+          <img src="img-metrics.png" alt="XplurData Metrics" class="screenshot-img" loading="lazy" />
+        </div>
+        <div class="screenshot-caption">
+          <h3>Metrics Explore <span class="badge badge-warn">Coming soon</span></h3>
+          <p>Time-series KPI monitoring, saturation charts, and performance trend visualizations. The OTEL
+            Collector is already ingesting metric data, the UI is next.</p>
+          <div class="caption-badges">
+            <span class="badge badge-info">In Development</span>
+            <span class="badge badge-success">Time-Series KPIs</span>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-panel" id="sc-panels-stats">
+        <div class="screenshot-wrap">
+          <div class="browser-chrome">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">http://localhost/xplur/stats</div>
+          </div>
+          <img src="img-stats.png" alt="XplurData stats Management" class="screenshot-img" loading="lazy" />
+        </div>
+        <div class="screenshot-caption">
+          <h3>Stats</h3>
+          <p>Full user administration with role-based access control. Admins can add, edit, or remove users.</p>
+          <div class="caption-badges">
+            <span class="badge badge-info">Role-Based Access</span>
+            <span class="badge badge-warn">Admin Protected</span>
+          </div>
+        </div>
+      </div>
+      <div class="screenshot-panel" id="sc-panels-users">
+        <div class="screenshot-wrap">
+          <div class="browser-chrome">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">http://localhost/xplur/users</div>
+          </div>
+          <img src="img-users.png" alt="XplurData User Management" class="screenshot-img" loading="lazy" />
+        </div>
+        <div class="screenshot-caption">
+          <h3>Admin User Management</h3>
+          <p>Full user administration with role-based access control. Admins can add, edit, or remove users.</p>
+          <div class="caption-badges">
+            <span class="badge badge-info">Role-Based Access</span>
+            <span class="badge badge-warn">Admin Protected</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="section roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Product Roadmap</span>
+        <h2 class="section-title">Where we're <span class="gradient-text">headed</span></h2>
+        <p class="section-sub">Transparent, community-driven development. Vote on what matters most to you.</p>
+      </div>
+
+      <!-- Timeline cards -->
+      <div class="roadmap-grid">
+        <!-- Q1 Completed -->
+        <div class="roadmap-card">
+          <div class="roadmap-card-header">
+            <span class="roadmap-quarter">Version1.0</span>
+            <span class="roadmap-status completed">Completed</span>
+          </div>
+          <h3>Foundation</h3>
+          <ul class="roadmap-list">
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            Smart Query Editor
+            </li>
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Visual Log Classification
+            </li>
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Flexible Time-Based Analysis
+            </li>
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Log Activity Analytics
+            </li>
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Free Text Search
+            </li>
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+             Basic Authentication & User Management
+            </li>
+             <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              One-Click Data Export
+            </li>
+          </ul>
+        </div>
+
+        <!-- Q2 Active -->
+        <div class="roadmap-card active">
+          <div class="roadmap-card-header">
+            <span class="roadmap-quarter">Version1.x</span>
+            <span class="roadmap-status in-progress">In Progress</span>
+          </div>
+          <h3>Observability Core</h3>
+          <ul class="roadmap-list">
+              <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Relevance-Based Search Ranking (BM25)
+            </li>
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Log Pattern Analyser
+            </li>
+            <li class="done">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Real-Time Incident Detection
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              Advanced Metrics Exploration
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              Distributed Trace Analytics
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              Full-Stack Application Observability
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              Unified Observability Dashboards
+            </li>
+          </ul>
+        </div>
+
+        <!-- Q3 Upcoming -->
+        <!--<div class="roadmap-card">
+          <div class="roadmap-card-header">
+            <span class="roadmap-quarter">Version X</span>
+            <span class="roadmap-status planned">Planned</span>
+          </div>
+          <h3>Advanced Analytics</h3>
+          <ul class="roadmap-list">
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              Alerting &amp; anomaly detection
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              Saved dashboards &amp; charts
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              Multi-tenant support
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              Webhook notifications
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              API key management
+            </li>
+          </ul>
+        </div> -->
+
+        <!-- Q4 Long-Term -->
+        <!--  <div class="roadmap-card">
+          <div class="roadmap-card-header">
+            <span class="roadmap-quarter">Version Y</span>
+            <span class="roadmap-status planned">Long-Term</span>
+          </div>
+          <h3>Enterprise &amp; Ecosystem</h3>
+          <ul class="roadmap-list">
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              SSO / SAML integration
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              Grafana plugin
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              ClickHouse storage adapter
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              k8s Helm chart
+            </li>
+            <li class="pending">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              AI log summarization
+            </li>
+          </ul>
+        </div>
+      </div>-->
+
+        <!-- Upvote + Suggest -->
+      </div>
+  </section>
+
+  <!-- DEPLOY -->
+  <section class="section deploy-section" id="deploy">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Get Started</span>
+        <h2 class="section-title">Up and running in <span class="gradient-text">minutes</span></h2>
+        <p class="section-sub">Two steps to a fully running OSS observability stack — follow the on-screen instructions
+          after each command.</p>
+      </div>
+      <div class="deploy-grid">
+        <div class="deploy-steps">
+
+          <div class="deploy-step" id="step-1">
+            <div class="step-number">01</div>
+            <div class="step-content">
+              <h3>Install the OSS Stack</h3>
+              <p>Run the command below and follow the on-screen instructions to set up the full observability stack
+                automatically.</p>
+              <div class="code-block">
+                <div class="code-block-header">
+                  <span class="code-lang">bash</span>
+                  <button class="copy-btn"
+                    data-copy="bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/xplurdata/oss-stack/main/install.sh)&quot;"
+                    id="copy-1" aria-label="Copy install command">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" />
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    Copy
+                  </button>
+                </div>
+                <pre><code><span class="c-keyword">bash</span> -c <span class="c-string">"$(curl -fsSL \</span>
+  <span class="c-string">https://raw.githubusercontent.com/xplurdata/oss-stack/main/install.sh)"</span></code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="deploy-step" id="step-2">
+            <div class="step-number">02</div>
+            <div class="step-content">
+              <h3>Generate Real Telemetry Data</h3>
+              <p>Once the stack is installed, populate it with live telemetry data using the OpenTelemetry load
+                generator.</p>
+              <div class="code-block">
+                <div class="code-block-header">
+                  <span class="code-lang">bash</span>
+                  <button class="copy-btn"
+                    data-copy="docker run --rm --network xd-oss-stack_otel-net ghcr.io/open-telemetry/opentelemetry-collector-contrib/telemetrygen:latest logs --otlp-endpoint otel-collector:4318 --otlp-http --otlp-insecure --duration 10s --rate 100 --service my-service"
+                    id="copy-2" aria-label="Copy data generation command">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" />
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    Copy
+                  </button>
+                </div>
+                <pre><code><span class="c-keyword">docker</span> run --rm \
+  --network <span class="c-string">xd-oss-stack_otel-net</span> \
+  <span class="c-string">ghcr.io/open-telemetry/opentelemetry-collector-contrib/telemetrygen:latest</span> \
+  logs \
+  --otlp-endpoint <span class="c-string">otel-collector:4318</span> \
+  --otlp-http --otlp-insecure \
+  --duration <span class="c-string">10s</span> \
+  --rate <span class="c-string">100</span> \
+  --service <span class="c-string">my-service</span></code></pre>
+              </div>
+              <div class="step-note step-note--success">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>Sends 100 logs/sec for 10s across 2 workers to the OTEL collector.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="deploy-step" id="step-3">
+            <div class="step-number">03</div>
+            <div class="step-content">
+              <h3>Instrument Your Application Logs</h3>
+              <p>Send telemetry from your own app directly to XplurData using the OpenTelemetry SDK. Works with any
+                language — Python, Node.js, Java, Go, and more.</p>
+
+              <div class="instrument-tabs" id="instrument-tabs">
+                <button class="inst-tab active" data-lang="python">Python</button>
+                <button class="inst-tab" data-lang="node">Node.js</button>
+                <button class="inst-tab" data-lang="java">Java</button>
+                <button class="inst-tab" data-lang="go">Go</button>
+              </div>
+
+<div class="instrument-tabs-wrap">
+              <div class="inst-panel active" id="inst-python">
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-lang">python</span>
+                    <button class="copy-btn" data-copy="pip install opentelemetry-sdk opentelemetry-exporter-otlp"
+                      id="copy-py-install">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                      Copy
+                    </button>
+                  </div>
+                  <pre><code><span class="c-comment"># Install</span>
+<span class="c-keyword">pip</span> install opentelemetry-sdk opentelemetry-exporter-otlp
+
+<span class="c-comment"># logs.py</span>
+<span class="c-keyword">import</span> logging
+<span class="c-keyword">from</span> opentelemetry._logs <span class="c-keyword">import</span> set_logger_provider
+<span class="c-keyword">from</span> opentelemetry.sdk._logs <span class="c-keyword">import</span> LoggerProvider, LoggingHandler
+<span class="c-keyword">from</span> opentelemetry.exporter.otlp.proto.http._log_exporter <span class="c-keyword">import</span> OTLPLogExporter
+
+provider = LoggerProvider()
+provider.add_log_record_processor(
+    BatchLogRecordProcessor(
+        OTLPLogExporter(
+            endpoint=<span class="c-string">"http://&lt;YOUR_HOST&gt;:4318/v1/logs"</span>
+        )
+    )
+)
+
+set_logger_provider(provider)
+
+logger = logging.getLogger(<span class="c-string">"my-service"</span>)
+logger.addHandler(LoggingHandler(logger_provider=provider))
+logger.info(<span class="c-string">"Hello from my-service!"</span>)
+</code></pre>
+                </div>
+              </div>
+
+              <div class="inst-panel" id="inst-node">
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-lang">Node.js</span>
+                    <button class="copy-btn"
+                      data-copy="npm install @opentelemetry/sdk-node @opentelemetry/exporter-trace-otlp-http"
+                      id="copy-node-install">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                      Copy
+                    </button>
+                  </div>
+                  <pre><code><span class="c-comment">// Install</span>
+<span class="c-keyword">npm</span> install @opentelemetry/sdk-logs @opentelemetry/exporter-logs-otlp-http
+
+<span class="c-comment">// logs.js</span>
+<span class="c-keyword">const</span> { LoggerProvider } =
+require(<span class="c-string">'@opentelemetry/sdk-logs'</span>)
+
+<span class="c-keyword">const</span> provider =
+<span class="c-keyword">new</span> LoggerProvider()
+
+provider.addLogRecordProcessor(
+  <span class="c-keyword">new</span> BatchLogRecordProcessor(
+    <span class="c-keyword">new</span> OTLPLogExporter({
+      url: <span class="c-string">'http://&lt;YOUR_HOST&gt;:4318/v1/logs'</span>
+    })
+  )
+)
+
+<span class="c-keyword">const</span> logger =
+provider.getLogger(<span class="c-string">'my-service'</span>)
+
+logger.emit({
+  severityText: <span class="c-string">'INFO'</span>,
+  body: <span class="c-string">'Hello from my-service!'</span>
+})
+</code></pre>
+                </div>
+              </div>
+
+              <div class="inst-panel" id="inst-java">
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-lang">java</span>
+                    <button class="copy-btn"
+                      data-copy="java -javaagent:opentelemetry-javaagent.jar -Dotel.service.name=my-service -Dotel.exporter.otlp.endpoint=http://YOUR_HOST:4318 -jar app.jar"
+                      id="copy-java">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                      Copy
+                    </button>
+                  </div>
+<pre><code><span class="c-comment"># Download OpenTelemetry Java Agent</span>
+<span class="c-keyword">wget</span> https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+
+<span class="c-comment"># Run your app</span>
+<span class="c-keyword">java</span> \
+-javaagent:opentelemetry-javaagent.jar \
+-Dotel.service.name=<span class="c-string">my-service</span> \
+-Dotel.logs.exporter=<span class="c-string">otlp</span> \
+-Dotel.exporter.otlp.endpoint=<span class="c-string">http://&lt;YOUR_HOST&gt;:4318</span> \
+-jar app.jar
+
+log.info(<span class="c-string">"Hello from my-service!"</span>);
+</code></pre>
+                </div>
+              </div>
+
+              <div class="inst-panel" id="inst-go">
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-lang">go</span>
+                    <button class="copy-btn"
+                      data-copy='go get go.opentelemetry.io/otel go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp'
+                      id="copy-go">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                      </svg>
+                      Copy
+                    </button>
+                  </div>
+<pre><code><span class="c-comment">// Install</span>
+<span class="c-keyword">go</span> get go.opentelemetry.io/otel
+
+<span class="c-comment">// main.go</span>
+exporter, _ := otlploghttp.New(
+    ctx,
+    otlploghttp.WithEndpoint(
+      <span class="c-string">"&lt;YOUR_HOST&gt;:4318"</span>,
+    ),
+)
+
+provider := sdklog.NewLoggerProvider(
+    sdklog.WithProcessor(
+        sdklog.NewBatchProcessor(exporter),
+    ),
+)
+
+logger := provider.Logger(
+    <span class="c-string">"my-service"</span>,
+)
+
+logger.Emit(ctx, sdklog.Record{
+    Body: sdklog.StringValue(
+      <span class="c-string">"Hello from my-service!"</span>,
+    ),
+})
+</code></pre>
+                </div>
+              </div>
+
+              </div>
+              <div class="step-note step-note--success">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>Replace <code class="inline-token">&lt;YOUR_HOST&gt;</code> with your server IP. The OTEL
+                  Collector listens on port <code class="inline-token">4318</code> (HTTP) and <code
+                    class="inline-token">4317</code> (gRPC).</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--<div class="deploy-services">
+          <div class="services-card" id="services-card">
+            <div class="services-card-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 20V10" />
+                <path d="M12 20V4" />
+                <path d="M6 20v-6" />
+              </svg>
+              Services started by the installer
+            </div>
+            <ul class="services-list">
+              <li class="service-item service-up" id="svc-frontend">
+                <span class="service-dot"></span>
+                <span class="service-name">frontend</span>
+                <span class="service-port">:3000</span>
+              </li>
+              <li class="service-item service-up" id="svc-api">
+                <span class="service-dot"></span>
+                <span class="service-name">otel-app</span>
+                <span class="service-port">:8000</span>
+              </li>
+              <li class="service-item service-up" id="svc-collector">
+                <span class="service-dot"></span>
+                <span class="service-name">otel-collector</span>
+                <span class="service-port">:4318</span>
+              </li>
+              <li class="service-item service-up" id="svc-doris-fe">
+                <span class="service-dot"></span>
+                <span class="service-name">doris-fe</span>
+                <span class="service-port">:8030</span>
+              </li>
+              <li class="service-item service-up" id="svc-doris-be">
+                <span class="service-dot"></span>
+                <span class="service-name">doris-be</span>
+                <span class="service-port">:9060</span>
+              </li>
+            </ul>
+            <div class="services-footer">
+              <span class="pulse-dot"></span>
+              All services healthy
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section class="section value-section" id="value">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Business Value</span>
+        <h2 class="section-title">Why <span class="gradient-text">XplurData</span>?</h2>
+      </div>
+      <div class="value-grid">
+        <div class="value-card spotlight-card" id="val-unified">
+          <div class="value-number">01</div>
+          <h3>Unified Observability</h3>
+          <p>Centralizes logs, traces, and metrics into one platform. No more tool sprawl — one place to query
+            everything.</p>
+        </div>
+        <div class="value-card spotlight-card" id="val-scale">
+          <div class="value-number">02</div>
+          <h3>Enterprise Scale</h3>
+          <p>Apache Doris handles billions of events with sub-second query latency. Built for production workloads from
+            day one.</p>
+        </div>
+        <div class="value-card spotlight-card" id="val-ux">
+          <div class="value-number">03</div>
+          <h3>Developer UX</h3>
+          <p>SQL-powered queries, customizable columns, dark mode, saved views. Built by engineers, for engineers.</p>
+        </div>
+        <div class="value-card spotlight-card" id="val-deploy">
+          <div class="value-number">04</div>
+          <h3>Easy Deployment</h3>
+          <p>Docker Compose for local and production. All services containerized with separate configs and Dockerfiles.
+          </p>
+        </div>
+        <div class="value-card spotlight-card" id="val-extend">
+          <div class="value-number">05</div>
+          <h3>Extensible API</h3>
+          <p>RESTful API-first design. Add new endpoints for traces, metrics, or any custom data source in minutes.</p>
+        </div>
+        <div class="value-card spotlight-card" id="val-secure">
+          <div class="value-number">06</div>
+          <h3>Security Built-In</h3>
+          <p>JWT auth, HTTP-only cookies, role-based access control, and CSRF mitigation — secure from the start.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section" id="cta">
+    <div class="container">
+      <div class="cta-card" id="cta-card">
+        <div class="cta-glow"></div>
+        <div class="cta-content">
+          <span class="section-label">Open Source</span>
+          <h2>Start observing your systems<br /><span class="gradient-text">today</span></h2>
+          <p>XplurData is open and ready to deploy. Built for teams who need real observability without the complexity
+            of commercial platforms.</p>
+          <div class="cta-actions">
+            <a href="#deploy" class="btn-primary btn-lg" id="cta-deploy">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+              Deploy with Docker
+            </a>
+            <a href="#architecture" class="btn-outline btn-lg" id="cta-arch">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Learn Architecture
+            </a>
+          </div>
+        </div>
+        <div class="cta-visual">
+          <div class="terminal" id="terminal">
+            <div class="terminal-header">
+              <span></span><span></span><span></span>
+              <span class="terminal-title">terminal</span>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+              <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">bash -c "$(curl -fsSL
+                  install.sh)"</span></div>
+              <div class="terminal-line t-out" id="tl-1">Fetching OSS stack installer...</div>
+              <div class="terminal-line t-out" id="tl-2">Pulling doris-fe image... <span class="t-ok">✓</span></div>
+              <div class="terminal-line t-out" id="tl-3">Pulling doris-be image... <span class="t-ok">✓</span></div>
+              <div class="terminal-line t-out" id="tl-4">Pulling otel-collector... <span class="t-ok">✓</span></div>
+              <div class="terminal-line t-out" id="tl-5">Starting otel-doris-stack_otel-net... <span
+                  class="t-ok">✓</span></div>
+              <div class="terminal-line t-out" id="tl-6">Stack running at http://localhost:3000 <span
+                  class="t-ok">✓</span></div>
+              <div class="terminal-line t-success" id="tl-7">✓ Installation complete. Now run telemetrygen to load data.
+              </div>
+              <div class="terminal-cursor" id="terminal-cursor">▋</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">We'd love to <span class="gradient-text">hear from you</span></h2>
+        <p class="section-sub">XplurData is open source and community-driven. Connect with us through any of the
+          channels below.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left: channels -->
+        <div class="contact-info">
+          <div class="contact-intro">
+            <h2>Connect with the team</h2>
+            <p>Whether you have a question, want to contribute, or just want to say hi — we're active across GitHub,
+              LinkedIn, Slack and more. Pick the channel that works best for you.</p>
+          </div>
+
+          <div class="contact-channels">
+            <a href="https://github.com/xplurdata/oss-stack" target="_blank" rel="noopener" class="contact-channel">
+              <div class="contact-channel-icon ch-github">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+              </div>
+              <div class="contact-channel-info">
+                <div class="contact-channel-name">GitHub</div>
+                <div class="contact-channel-desc">Star the repo, open issues, submit PRs</div>
+              </div>
+              <span class="contact-channel-arrow">→</span>
+            </a>
+
+            <a href="https://linkedin.com/company/xplurdata" target="_blank" rel="noopener" class="contact-channel">
+              <div class="contact-channel-icon ch-linkedin">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#0077B5">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </div>
+              <div class="contact-channel-info">
+                <div class="contact-channel-name">LinkedIn</div>
+                <div class="contact-channel-desc">Follow for product updates and announcements</div>
+              </div>
+              <span class="contact-channel-arrow">→</span>
+            </a>
+
+            <a href="https://xplurdata.slack.com/join/shared_invite/zt-3ztbx9k5e-ZAqInDjoyoICfB2ohq9NsQ#/shared-invite/email" target="_blank" rel="noopener"
+              class="contact-channel">
+              <div class="contact-channel-icon ch-slack">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#4A154B">
+                  <path
+                    d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.687 8.834a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zM15.166 18.956a2.528 2.528 0 0 1 2.521 2.522A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.522h2.521zM15.166 17.687a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z" />
+                </svg>
+              </div>
+              <div class="contact-channel-info">
+                <div class="contact-channel-name">Slack Community</div>
+                <div class="contact-channel-desc">Chat with contributors and get help</div>
+              </div>
+              <span class="contact-channel-arrow">→</span>
+            </a>
+
+            <a href="mailto:hello@xplurdata.io" class="contact-channel">
+              <div class="contact-channel-icon ch-email">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06805f" stroke-width="2">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <polyline points="2,4 12,13 22,4" />
+                </svg>
+              </div>
+              <div class="contact-channel-info">
+                <div class="contact-channel-name">Email</div>
+                <div class="contact-channel-desc">bridge@xplurdata.com</div>
+              </div>
+              <span class="contact-channel-arrow">→</span>
+            </a>
+          </div>
+
+          <div class="contact-community">
+            <h3>Open Source Community</h3>
+            <p>XplurData is built in the open. Contribute code, report bugs, improve docs, or just share feedback —
+              every contribution matters.</p>
+            <div class="community-links">
+              <a href="https://github.com/xplurdata/oss-stack/issues" target="_blank" rel="noopener"
+                class="community-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                Report a Bug or Request a Feature
+              </a>
+              <a href="https://github.com/xplurdata/oss-stack/discussions" target="_blank" rel="noopener"
+                class="community-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+                GitHub Discussions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: OSS card + stats + social quick-links -->
+        <div class="contact-side">
+          <div class="contact-oss-card">
+            <div class="contact-oss-badge">🔓 AGPLv3 License</div>
+            <h3>100% Free &amp; Open Source</h3>
+            <p>XplurData is AGPLv3-licensed. Use it, fork it, build on it — no strings attached. Self-host on your own
+              infrastructure with full control over your data.</p>
+            <div class="contact-oss-actions">
+              <a href="https://github.com/xplurdata/oss-stack" target="_blank" rel="noopener" class="btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                ⭐ Star on GitHub
+              <span class="hero-star-count" id="contact-star-count"></span>
+              </a>
+              <a href="#deploy" class="btn-outline">Get Started Free</a>
+            </div>
+          </div>
+
+          <div class="contact-stats-grid">
+            <div class="contact-stat">
+              <span class="contact-stat-val">AGPLv3</span>
+              <span class="contact-stat-label">Open Source License</span>
+            </div>
+            <div class="contact-stat">
+              <span class="contact-stat-val">100%</span>
+              <span class="contact-stat-label">Self-Hostable</span>
+            </div>
+            <div class="contact-stat">
+              <span class="contact-stat-val">OTEL</span>
+              <span class="contact-stat-label">Native Protocol</span>
+            </div>
+            <div class="contact-stat">
+              <span class="contact-stat-val">Docker</span>
+              <span class="contact-stat-label">One-Command Deploy</span>
+            </div>
+          </div>
+
+         <!-- <div class="contact-community">
+            <h3>Follow &amp; Stay Updated</h3>
+            <p>Get the latest releases, tutorials, and community highlights.</p>
+            <div class="contact-social-row">
+              <a href="https://github.com/xplurdata/oss-stack" target="_blank" rel="noopener"
+                class="contact-social-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a href="https://linkedin.com/company/xplurdata" target="_blank" rel="noopener"
+                class="contact-social-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#0077B5">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://join.slack.com/t/xplurdata/shared_invite" target="_blank" rel="noopener"
+                class="contact-social-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#4A154B">
+                  <path
+                    d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.687 8.834a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zM15.166 18.956a2.528 2.528 0 0 1 2.521 2.522A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.522h2.521zM15.166 17.687a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z" />
+                </svg>
+                <span>Slack</span>
+              </a>
+            </div>
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <span class="logo-icon">
+            <img src="XplurData.svg" alt="XplurData Logo" width="28" height="28">
+          </span>
+          <span class="logo-text">XplurData</span>
+        </a>
+        <p>Production-ready OpenTelemetry observability — Apache Doris + OTel Collector + XD-API + XD-APP. One command
+          deploy for Linux, macOS.</p>
+        <div class="footer-social">
+          <a href="https://github.com/xplurdata/oss-stack" target="_blank" rel="noopener" class="footer-social-link"
+            aria-label="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
+          <a href="https://linkedin.com/company/xplurdata" target="_blank" rel="noopener" class="footer-social-link"
+            aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a href="https://xplurdata.slack.com/join/shared_invite/zt-3ztbx9k5e-ZAqInDjoyoICfB2ohq9NsQ#/shared-invite/email" target="_blank" rel="noopener"
+            class="footer-social-link" aria-label="Slack">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.687 8.834a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zM15.166 18.956a2.528 2.528 0 0 1 2.521 2.522A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.522h2.521zM15.166 17.687a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="docs.html">Docs</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#screenshots">Product</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Technology</h5>
+          <ul>
+            <li><a href="#deploy">Deployment</a></li>
+            <li><a href="#value">Business Value</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Powered By</h5>
+          <ul>
+            <li><a href="https://opentelemetry.io" target="_blank" rel="noopener">OpenTelemetry</a></li>
+            <li><a href="https://doris.apache.org" target="_blank" rel="noopener">Apache Doris</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 XplurData</span>
+      <div class="footer-legal">
+        <a href="https://xplurdata.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="https://xplurdata.com/terms" target="_blank" rel="noopener">Terms of Service</a>
+        <a href="https://www.gnu.org/licenses/agpl-3.0.html#license-text" target="_blank" rel="noopener"><img
+           width="75" height="21" src="agplv3.png" alt="AGPL License"></a>
+      </div>
+  </footer>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
